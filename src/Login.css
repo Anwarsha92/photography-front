@@ -21,6 +21,7 @@
     border-bottom: 1px solid #fff;
     outline: none;
     background: transparent;
+    margin-top: 10px;
   }
   
   .login-box .user-box label {

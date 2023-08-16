@@ -18,10 +18,10 @@ function App() {
         <Route path='/' element={<Home/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
-        <Route path='/login/user_dashboard' element={<UserDashboard/>}></Route>
-        <Route path='/login/user_dashboard/user_profile' element={<Profile/>}></Route>
-        <Route path='/login/user_dashboard/user_profile/user_edit' element={<EditProfile/>}></Route>
-        <Route path='/view_more' element={<ViewMore/>}></Route>
+        <Route path='/login/user_dashboard/:id' element={<UserDashboard/>}></Route>
+        <Route path='/login/user_dashboard/user_profile/:id' element={<Profile/>}></Route>
+        <Route path='/login/user_dashboard/user_profile/user_edit/:id' element={<EditProfile/>}></Route>
+        <Route path='/view_more/:id' element={<ViewMore/>}></Route>
       </Routes>
     </div>
   );

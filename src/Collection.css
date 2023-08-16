@@ -1,33 +1,34 @@
-.card2{
+/* .card1 {
     position: relative;
-    /* max-width: 90%; */
-    /* height: 250px; */
-    /* background-image: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% ); */
+    width: 250px;
+    min-width: 25%;
+    height: 250px;
+    background-image: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
     border-radius: 10px;
     display: flex;
-    /* padding: 10px 20px; */
-    flex-direction: column;
+    padding: 10px 30px;
+    flex-direction: row;
     gap: 10px;
-    /* align-items: center; */
+    align-items: center;
     justify-content: center;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
   
-  .heading {
+  .heading1 {
     font-size: 24px;
     font-weight: 700;
-    color: #000000;
+    color: #ffffff;
   }
   
-  .para {
+  .para1 {
     text-align: center;
     color: #ffffff;
     opacity: 0.7;
     line-height: 1.4;
   }
   
-  .overlay {
+  .overlay1 {
     position: absolute;
     top: 0;
     left: 0;
@@ -39,12 +40,12 @@
     pointer-events: none;
   }
   
-  .card2:hover .overlay {
+  .card1:hover .overlay1 {
     opacity: 1;
     pointer-events: auto;
   }
   
-  .card2 .card2-btn {
+  .card1 .card-btn1 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -67,20 +68,20 @@
     transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
   }
   
-  .card2:hover .card2-btn {
+  .card1:hover .card-btn1 {
     opacity: 1;
     scale: 1;
   }
   
-  .card2 .card2-btn:hover {
+  .card1 .card-btn1:hover {
     box-shadow: 0 0 0px 5px rgba(0, 0, 0, 0.3);
   }
   
-  .card2 .card2-btn:active {
+  .card1 .card-btn1:active {
     scale: 0.95;
   }
   
-  .overlay::after {
+  .overlay1::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -92,7 +93,7 @@
     transition: transform 0.5s ease;
   }
   
-  /* .card:hover .overlay::after {
+  .card1:hover .overlay1::after {
     transform: translate(-50%, -50%) scale(2);
-  } */
-  
+  }
+   */
