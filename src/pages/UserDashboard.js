@@ -16,7 +16,7 @@ import { editContext, loginContext} from "../components/ContextShare";
 import { ToastContainer, toast } from "react-toastify";
 import Collection from "./Collection";
 import { addImages, getUserDetails, removeImage } from "../services/allApis";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../services/base_url";
 
 const UserDashboard = () => {
@@ -49,6 +49,8 @@ console.log(editDetails);
 
     if (image === "") {
       toast.error("Please select an image");
+    }else if (description === "") {
+      toast.error("Description required");
     } else {
       const headerConfig = {
         "Content-Type": "multipart/form-data",
@@ -58,7 +60,7 @@ console.log(editDetails);
       data.append("description",description)
       const response = await addImages(id, data, headerConfig);
       if(response.status===200){
-        toast.success("Item added successfully")
+        toast.success("Item successfully added")
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -88,7 +90,7 @@ console.log(editDetails);
     const data=index
       const response=await removeImage(id,{data})
       if(response.status===200){
-        toast.success("Deleted Successfully")
+        toast.success("Successfully Deleted ")
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -98,6 +100,10 @@ console.log(editDetails);
   }
   const viewProfile=()=>{
     navigate(`/login/user_dashboard/user_profile/${id}`)
+  }
+
+  const logout=()=>{
+    navigate('/')
   }
   useEffect(() => {
     setTimeout(() => {
@@ -125,7 +131,7 @@ console.log(editDetails);
               <img
               style={{width:'100%',height:'250px'}}
                 className="rounded-circle mb-4"
-                src={`${BASE_URL}/uploads/${profilePhoto}`}
+                src={profilePhoto?`${BASE_URL}/uploads/${profilePhoto}`:"https://i.postimg.cc/m2Dgt99r/pngwing-com-2.png"}
                 alt="no image"
               />
               <Button href="">Dashboard</Button>
@@ -155,14 +161,14 @@ console.log(editDetails);
                   </Button>
                 </form>
               )}
-              <Button>Log Out</Button>
+              <Button onClick={logout}>Log Out</Button>
             </div>
 
             <div className="user-profilesm mt-2">
               <Button href="">
                 <FaTh />
               </Button>
-              <Button>
+              <Button onClick={viewProfile}>
                 <FaUserAlt />
               </Button>
               <Button onClick={addCollection}>
@@ -194,7 +200,7 @@ console.log(editDetails);
                   </form>
                 </div>
               )}
-              <Button>Log Out</Button>
+              <Button onClick={logout}>Log Out</Button>
             </div>
           </div>
           <div className="p-3 w-100 ">

@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../App.css";
-import { Button, Form, Spinner } from "react-bootstrap";
+import { Alert, Button, Form, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ViewProfile from "./ViewProfile";
 import { allUsers } from "../services/allApis";
+import { deleteContext } from "../components/ContextShare";
 
 const Home = () => {
   const [showSpinner, setShowSpinner] = useState(true);
   const [users,setUsers]=useState([])
 
+  const [searchKey,setSearchKey]=useState("")
+
+
+  //deleteContext to get user details
+  const {deleteUser,setDeleteUser}=useContext(deleteContext)
+
+  console.log(deleteUser);
+
   const getAllUsers=async()=>{
-    const {data}=await allUsers()
+    const {data}=await allUsers(searchKey)
     setUsers(data)
   }
 
@@ -19,31 +28,29 @@ const Home = () => {
       setShowSpinner(false);
     }, 2500);
     getAllUsers()
-  },[]);
+  },[searchKey]);
   return (
     <div className="pb-5">
+      
       <div
-        className="header p-2 pb-5 pt-5"
-        style={{ minHeight: "300px", width: "100%" }}
+        className="header p-2 pb-5 pt-5 text-center"
+        style={{ minHeight: "300px", width: "100%",fontSize:'30px'}}
       >
-        <h1 className="text-center">
+        {/* <h1 className="text-center" > */}
           <q style={{ color: "yellow",fontSize:'larger' }}>
-            {" "}
-            <span style={{ color: "snow" }}>Explore</span>{" "}
-            <span style={{ color: "snow" }}>Photographies</span>{" "}
-            <span style={{ color: "snow" }}>and</span>{" "}
-            <span style={{ color: "snow" }}>Memmorise</span> <br />{" "}
-            <span style={{ color: "snow" }}>Your Moments</span>{" "}
+            
+            <span className="heading" style={{ color: "snow",fontSize:'30px'}}>Explore Photographies and Memmorise Your Moments</span>
+           
           </q>
-        </h1>
+        {/* </h1> */}
       </div>
       <div className="container search_add mt-5">
         <Form className="d-flex gap-2 flex-wrap search">
-          <Form.Control type="text" className="shadow" placeholder="Search by your location" />{" "}
-          <Button>Search</Button>
+          <Form.Control type="text" className="" placeholder="Search by your location" value={searchKey} onChange={(e)=>setSearchKey(e.target.value)}/>
+          <Button onClick={()=>setSearchKey("")}>View All</Button>
         </Form>
         <div>
-          <Link to={"login"}>
+          <Link style={{color:'green'}} to={"login"}>
             Add Your Collection
           </Link>
         </div>

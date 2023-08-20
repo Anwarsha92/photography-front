@@ -28,7 +28,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 10px 0;
+    /* padding: 10px 0; */
     font-size: 16px;
     color: #fff;
     pointer-events: none;
@@ -36,14 +36,15 @@
   }
   
   .login-box .user-box input:focus ~ label,
-  .login-box .user-box input:valid ~ label {
-    top: -20px;
+  .login-box .user-box input:valid ~ label
+  {
+    top: -10px;
     left: 0;
     color: #bdb8b8;
     font-size: 12px;
   }
   
-  .login-box form a {
+  .login-box form button {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
@@ -54,10 +55,12 @@
     overflow: hidden;
     transition: .5s;
     margin-top: 40px;
-    letter-spacing: 4px
+    letter-spacing: 4px;
+    background-color: unset;
   }
   
-  .login-box a:hover {
+  .login-box button:hover {
+    border: none;
     background: #03f40f;
     color: #fff;
     border-radius: 5px;
@@ -80,7 +83,7 @@
     box-shadow: none
   }
   
-  .login-box a span {
+  .login-box button span {
     position: absolute;
     display: block;
   }
@@ -95,11 +98,21 @@
     }
   }
   
-  .login-box a span:nth-child(1) {
+  .login-box button span:nth-child(1) {
     bottom: 2px;
     left: -100%;
     width: 100%;
     height: 2px;
     background: linear-gradient(90deg, transparent, #03f40f);
     animation: btn-anim1 2s linear infinite;
+  }
+
+  .error{
+    color: red;
+    display: none;
+    font-size: smaller;
+    font-weight: lighter;
+  }
+  input:invalid[focus='true']~.error{
+    display: inline-block;
   }

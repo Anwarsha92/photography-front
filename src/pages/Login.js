@@ -9,8 +9,8 @@ import { userLogin } from "../services/allApis";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate=useNavigate()
-  const {loginData, setLoginData}=useContext(loginContext)
+  const navigate = useNavigate();
+  const { loginData, setLoginData } = useContext(loginContext);
   const { registerData, setRegisterData } = useContext(registerContext);
   const [showSpinner, setShowSpinner] = useState(true);
 
@@ -18,6 +18,13 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const [focus,setFocus]=useState(
+    {
+      errEmail:false,
+      errPassword:false
+    }
+  )
   const inputData = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
@@ -30,14 +37,14 @@ const Login = () => {
       toast.error("Email required");
     } else if (password === "") {
       toast.error("Password required");
-    }else{
-      const response=await userLogin(inputs)
+    } else {
+      const response = await userLogin(inputs);
       console.log(response);
-      if(response.status===200){
-        navigate(`/login/user_dashboard/${response.data._id}`)
-        setLoginData(response.data)
-      }else if(response.response.status===404){
-        toast.error("Incorrect email or password")
+      if (response.status === 200) {
+        navigate(`/login/user_dashboard/${response.data._id}`);
+        setLoginData(response.data);
+      } else if (response.response.status === 404) {
+        toast.error("Incorrect email or password");
       }
     }
   };
@@ -62,18 +69,27 @@ const Login = () => {
       {showSpinner ? (
         <LoadingSpinner />
       ) : (
-        <div className="login-box container mt-5 p-5" style={{ width: "400px" }}>
-          <form>
+        <div
+          className="login-box container mt-5 p-5"
+          style={{ width: "400px" }}
+        >
+          <form onSubmit={handleLogin}>
             <h3 className="text-white text-center mb-5">Login</h3>
             <div className="user-box">
               <input
-                type="text"
+                type="email"
                 value={inputs.email}
                 name="email"
                 required
                 onChange={inputData}
+                onBlur={()=>setFocus({...focus,errEmail:true})}
+                focus={focus.errEmail.toString()}
+                
               />
               <label>Email</label>
+              <span className="error">
+                <p>Enter valid email </p>
+              </span>
             </div>
             <div className="user-box">
               <input
@@ -82,17 +98,22 @@ const Login = () => {
                 name="password"
                 required
                 onChange={inputData}
+                onBlur={()=>setFocus({...focus,errPassword:true})}
+                focus={focus.errPassword.toString()}
+                pattern="^.{3,}"
               />
               <label>Password</label>
+              <span className="error">
+                <p>Password contain minimum 3 characters</p>
+              </span>
             </div>
             <center>
-              <a type="submit" onClick={handleLogin}>
+              <button type="submit">
                 Login
-                <span></span>
-              </a>
+              </button>
             </center>
           </form>
-          <div className="signup text-center">
+          <div className="signup text-center mt-3">
             <a href="register">Not Register? Please Sign Up Here</a>
           </div>
         </div>

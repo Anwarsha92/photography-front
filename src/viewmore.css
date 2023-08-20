@@ -1,0 +1,19 @@
+.image{
+    transition: .6s;
+    cursor: pointer;
+
+}
+
+.image:hover{
+transform: scale(1.3);
+}
+
+.viewMore{
+    width: 450px;
+}
+
+@media(max-width:450px){
+    .viewMore{
+      width: 80%;
+    }
+  }

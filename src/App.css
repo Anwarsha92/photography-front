@@ -12,27 +12,37 @@
     /* border-radius: 30px; */
     outline: unset;
 }
-
+input:focus{
+    outline: unset !important;
+}
 .search_add BUTTON{
-    border-radius: 30px;
+    border-radius: 10px;
+    background-color: red;
+
+}
+.search_add BUTTON:hover{
+    
+    background-color: red;
 
 }
 
 
 
-h1,h3{
-    font-family: 'Luckiest Guy', cursive;
+.heading{
+    font-family:'Pacifico', cursive;
 }
 .header{
+    /* height: 200px; */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(https://i.postimg.cc/P53BgB0v/Untitled-design-1.png);
+    background-image: url(https://i.postimg.cc/K4hzL26h/2021-09-03.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    box-shadow: 0 10px 10px -10px #000000;
 }
 
-@media(max-width:500px){
+@media(max-width:768px){
     .search_add, .search_add .search{
         justify-content: center;
     }

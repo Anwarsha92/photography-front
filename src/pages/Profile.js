@@ -1,16 +1,20 @@
-import React, {useEffect, useState } from "react";
+import React, {useContext, useEffect, useState } from "react";
 import "../Profile.css";
 import { Button, Card, Spinner } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getUserDetails } from "../services/allApis";
+import { deleteProfile, getUserDetails } from "../services/allApis";
 import { BASE_URL } from "../services/base_url";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { deleteContext } from "../components/ContextShare";
 
 const Profile = () => {
 
-//dashboard context to get user details
   const[profileDetails,setProfileDetails]=useState("")
+
+  //deleteContext to pass user details
+  const {deleteUser,setDeleteUser}=useContext(deleteContext)
+
 
   const {id}=useParams()
   const navigate=useNavigate()
@@ -31,7 +35,14 @@ const submit = () => {
     buttons: [
       {
         label: 'Yes',
-        // onClick: () => alert('Click Yes')
+        onClick: async () => {
+          const response= await deleteProfile(id)
+        console.log(response);
+        if (response.status===200){
+          setDeleteUser(response.fname)
+            navigate('/') 
+        }
+        }
       },
       {
         label: 'No',
@@ -66,22 +77,19 @@ const getUser = async () => {
         </div>
       ) : (
         <div class="container shadow mt-3" style={{ width: "500px" }}>
-          <div class="image">
-            <img className="w-100" src={`${BASE_URL}/uploads/${profileDetails.profile}`} alt="" />
+          <div>
+            <img className="w-100" src={profileDetails.profile?`${BASE_URL}/uploads/${profileDetails.profile}`:"https://i.postimg.cc/m2Dgt99r/pngwing-com-2.png"} alt="" />
           </div>
           <div class="content">
-            <h5>Name</h5>
-            <p>{profileDetails&&profileDetails.fname}</p>
-
-            <h5>
-              Address
-            </h5>
+            <h4>{profileDetails&&profileDetails.fname}</h4>
+            {profileDetails&&profileDetails.email} <br />
+            {profileDetails&&profileDetails.mobile} <br />
             {profileDetails&&profileDetails.address}
 
 
             <div className="d-flex justify-content-between w-100">
               <Button onClick={updateProfile}>
-                  Update
+                  Edit
               </Button>
               <Button onClick={submit}> Delete</Button>
             </div>

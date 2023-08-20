@@ -7,7 +7,7 @@ const ViewProfile = ({ users }) => {
   console.log(users);
   return (
     <div>
-            <h3 className="text-center">Latest Collections</h3>
+            <h3 className="text-center mt-3 mb-3">Latest Collections</h3>
 
       <div className="d-flex flex-wrap justify-content-center gap-3">
         {users &&
@@ -32,8 +32,8 @@ const ViewProfile = ({ users }) => {
                         <div><img style={{height:'50px',width:'50px'}} className="rounded-circle shadow" src={`${BASE_URL}/uploads/${item.profile}`} alt="" /></div>
                       )
                     }
-                    <span>Collection by </span><span style={{fontWeight:'bold'}}>{item.fname}</span><br />
-                    (<span style={{color:'red'}}>{item.collections.length}</span> collections)
+                    <span>Collection by </span><span style={{fontWeight:'bold'}}>{item.fname.toUpperCase()}</span>(<span style={{color:'red'}}>{item.collections.length} </span>{item.collections.length>1?"Pins":"Pin"})<br />
+                    <span>{item.address}</span><br />
                     
                   </div>
 

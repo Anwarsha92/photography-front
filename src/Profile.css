@@ -14,11 +14,7 @@
     padding: 1.1rem;
   }
   
-  .image {
-    object-fit: cover;
-    width: 100%;
-    background-color: rgb(35, 32, 36);
-  }
+  
   
   .title {
     color: #111827;

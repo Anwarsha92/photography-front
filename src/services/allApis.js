@@ -24,6 +24,10 @@ export const profileUpdate=async(id,body,header)=>{
   return commonRequest("PUT",`${BASE_URL}/update_profile/${id}`,body,header)
 }
 
-export const allUsers=async()=>{
-  return commonRequest("GET",`${BASE_URL}/get_all_users`,"")
+export const allUsers=async(searchKey)=>{
+  return commonRequest("GET",`${BASE_URL}/get_all_users?search=${searchKey}`,"")
+}
+
+export const deleteProfile=async(id)=>{
+  return commonRequest("DELETE",`${BASE_URL}/delete_user/${id}`,{})
 }
